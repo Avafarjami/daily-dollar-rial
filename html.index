@@ -14,8 +14,9 @@
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
         <a-entity mindar-image-target="targetIndex: 0">
-            <a-text id="price-text" value="Loading..." color="green" align="center" width="2" position="0 0 0.1"></a-text>
+            <a-text id="price-text" value="Loading Price..." color="#00FF00" align="center" width="2" position="0 0 0.1"></a-text>
         </a-entity>
+        
     </a-scene>
 
     <script>
@@ -25,8 +26,11 @@
                 const data = await response.json();
                 const rate = data.rates.IRR;
                 const price = (10000 / rate).toFixed(4);
-                document.querySelector('#price-text').setAttribute('text', 'value', `10,000 Rial = $${price} USD`);
+                
+                const display = document.querySelector('#price-text');
+                display.setAttribute('text', 'value', `10,000 Rial = $${price} USD`);
             } catch (e) { 
+                console.error("API Error:", e);
                 document.querySelector('#price-text').setAttribute('text', 'value', "API Error");
             }
         }
