@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: ./banknote.mind; filterMinCF:0.001; filterBeta:0.01;" 
+             color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" 
+             vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-text id="price-text" value="Loading..." color="#00FF00" align="center" width="2" position="0 0 0.1"></a-text>
+      </a-entity>
+    </a-scene>
+
+    <script>
+      async function updatePrice() {
+        try {
+          const response = await fetch("https://open.er-api.com/v6/latest/USD");
+          const data = await response.json();
+          const rate = data.rates.IRR;
+          const price = (10000 / rate).toFixed(4);
+          document.querySelector('#price-text').setAttribute('text', 'value', `10,000 Rial = $${price} USD`);
+        } catch (e) {
+          document.querySelector('#price-text').setAttribute('text', 'value', "API Error");
+        }
+      }
+      // اجرای تابع قیمت به محض لود شدن صفحه
+      window.onload = updatePrice;
+    </script>
+  </body>
+</html>
