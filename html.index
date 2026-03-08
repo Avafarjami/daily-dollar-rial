@@ -7,14 +7,14 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.0/dist/mindar-image-aframe.prod.js"></script>
 </head>
 <body>
-    <a-scene mindar-image="imageTargetSrc: ./banknote.mind; filterMinCF: 0.0001; filterBeta: 0.001;" 
+    <a-scene mindar-image="imageTargetSrc: https://avafarjami.github.io/daily-dollar-rial/banknote.mind; filterMinCF: 0.0001; filterBeta: 0.001;" 
              color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" 
              vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
         
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
         <a-entity mindar-image-target="targetIndex: 0">
-            <a-text id="price-text" value="Loading Price..." color="green" align="center" width="2" position="0 0 0.1"></a-text>
+            <a-text id="price-text" value="Loading..." color="green" align="center" width="2" position="0 0 0.1"></a-text>
         </a-entity>
     </a-scene>
 
